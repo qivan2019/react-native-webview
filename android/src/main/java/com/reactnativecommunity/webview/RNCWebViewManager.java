@@ -621,6 +621,14 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
+      //从这里开始加入
+      if(url.contains("https://wx.tenpay.com")){
+        Map<String,String> map=new HashMap<String, String>();
+        map.put("Referer", "https://wxtest.huaguilife.cn");//这里是对应的配置文件
+        view.loadUrl(url,map);
+        return true;
+      }
+      //到这里结束
       dispatchEvent(
         view,
         new TopShouldStartLoadWithRequestEvent(
